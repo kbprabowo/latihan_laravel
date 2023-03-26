@@ -19,21 +19,12 @@
                                 <label for="name" class="form-label">Masukan nama hewan</label>
                                 <input type="text" class="form-control" name="name" placeholder="Nama Hewan">
                             </div>
-                            <label class="form-check-label">
-                                Jenis Hewan
-                            </label><br>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" value="0">
-                                <label class="form-check-label" for="status">
-                                    Buas
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" value="1">
-                                <label class="form-check-label" for="status">
-                                    jinak
-                                </label>
-                            </div><br>
+                            <select name="characteristic_id" class="form-select" aria-label="Default select example">
+                                <option selected>Pilih karakter hewannya</option>
+                                @foreach ($characteristics as $characteristic)
+                                    <option value="{{ $characteristic->id }}">{{ $characteristic->name }}</option>
+                                @endforeach
+                            </select><br>
                             <input class="btn btn-primary" type="submit" name="submit" value="save">
                         </form>
                     </div>

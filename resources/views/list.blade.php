@@ -19,7 +19,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nama</th>
-                                    <th>Status</th>
+                                    <th>karakteristik</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -28,7 +28,7 @@
                                     <tr>
                                         <td> {{ $animal->id }} </td>
                                         <td> {{ $animal->name }} </td>
-                                        <td> {{ $animal->status }} </td>
+                                        <td> {{ $animal->characteristic->name }} </td>
                                         <td>
                                             <a class="btn btn-primary d-grid gap-2 col-4"
                                                 href="/{{ $animal->id }}/edit">Edit</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Animal;
+use App\Models\Characteristic;
 use Illuminate\Support\Facades\Validator;
 
 class ListController extends Controller
@@ -16,7 +17,8 @@ class ListController extends Controller
 
     public function create()
     {
-        return View('create');
+        $characteristics = Characteristic::all();
+        return View('create', compact(['characteristics']));
     }
 
     //validasi input, array declaration
@@ -24,7 +26,7 @@ class ListController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'status' => 'required|boolean',
+            'characteristic_id' => 'required',
         ]);
         if ($validator->fails()) {
             return redirect('/create')
@@ -33,7 +35,7 @@ class ListController extends Controller
         }
         $animal = Animal::create([
             'name' => $request->name,
-            'status' => $request->status,
+            'characteristic_id' => $request->characteristic_id,
         ]);
         return redirect('list');
     }
