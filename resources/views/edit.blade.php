@@ -7,11 +7,6 @@
                     <div class="card-header">{{ __('Edit') }}</div>
 
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
                         <h1>Edit Data Animal</h1>
                         <form action="/{{ $animals->id }}" method="POST">
                             @method('put')
@@ -23,20 +18,12 @@
                             <label class="form-check-label">
                                 Jenis Hewan
                             </label><br>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" value="0"
-                                    {{ $animals->status == '0' ? 'checked' : '' }}>
-                                <label class="form-check-label" for="status">
-                                    Buas
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" value="1"
-                                    {{ $animals->status == '1' ? 'checked' : '' }}>
-                                <label class="form-check-label" for="status">
-                                    jinak
-                                </label>
-                            </div><br>
+                            <select name="characteristic_id" class="form-select" aria-label="Default select example">
+                                <option selected>Pilih karakter hewannya</option>
+                                @foreach ($characteristics as $characteristic)
+                                    <option value="{{ $characteristic->id }}">{{ $characteristic->name }}</option>
+                                @endforeach
+                            </select><br>
                             <input class="btn btn-primary" type="submit" name="submit" value="save">
                         </form>
                     </div>
