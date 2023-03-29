@@ -26,7 +26,7 @@ class ListController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'characteristic_id' => 'required',
+            'characteristic_id' => 'required|int',
         ]);
         if ($validator->fails()) {
             return redirect('/create')
