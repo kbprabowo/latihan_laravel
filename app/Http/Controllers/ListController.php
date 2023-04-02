@@ -51,16 +51,18 @@ class ListController extends Controller
     public function update($id, Request $request)
     {
         //$animals = Animal::find($id);
-        Animal::where('id', $id)->update(['name' => $request['name'], 'characteristic_id' => $request['characteristic_id']]);
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'characteristic_id' => 'required|int',
+            'characteristic_id' => 'required|int|gt:0',
         ]);
         if ($validator->fails()) {
-            return redirect('/edit')
+            return redirect($id . '/edit')
                 ->withInput()
                 ->withErrors($validator);
         }
+
+        Animal::where('id', $id)->update(['name' => $request['name'], 'characteristic_id' => $request['characteristic_id']]);
+
         return redirect('list');
     }
 

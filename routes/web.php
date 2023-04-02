@@ -27,8 +27,7 @@ Route::put('/{id}', [ListController::class, 'update']);
 Route::delete('/{id}', [ListController::class, 'destroy']); */
 
 Auth::routes();
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/list', [ListController::class, 'index']);
