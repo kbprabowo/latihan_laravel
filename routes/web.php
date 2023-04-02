@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ListController;
 
@@ -37,4 +38,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/{id}/edit', [ListController::class, 'edit']);
     Route::put('/{id}', [ListController::class, 'update']);
     Route::delete('/{id}', [ListController::class, 'destroy']);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/animals', [AnimalController::class, 'index']);
+
+    Route::get('/animals/create', [AnimalController::class, 'create']);
+    Route::post('/animals', [AnimalController::class, 'store']);
+
+    Route::get('/animals/{id}/edit', [AnimalController::class, 'edit']);
+    Route::put('/animals/{id}', [AnimalController::class, 'update']);
+
+    Route::delete('/animals/{id}', [AnimalController::class, 'destroy']);
 });
