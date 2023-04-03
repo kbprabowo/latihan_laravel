@@ -11,7 +11,7 @@ class AnimalController extends Controller
 {
     public function index()
     {
-        $animals = Animal::all();
+        $animals = Animal::paginate(10);
         // $animals = Animal::simplePaginate(5);
         return View('/animals', compact(['animals']));
     }

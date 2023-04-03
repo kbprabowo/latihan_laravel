@@ -12,7 +12,7 @@
                             </div>
                         @endif
 
-                        <h1>List nama hewan</h1>
+                        <h1>List nama hewan</h1><br>
                         <a class="btn btn-info float-end" href="/animals/create">Add New Animal</a>
                         <table class="table table-striped table-hover">
                             <thead>
@@ -44,6 +44,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $animals->links() }}
                     </div>
                 </div>
             </div>
