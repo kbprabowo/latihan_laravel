@@ -16,10 +16,11 @@ class AnimalController extends Controller
         return View('/animals', compact(['animals']));
     }
 
-    public function create()
+    public function create($id)
     {
         $characteristics = Characteristic::all();
-        return View('/animals/create', compact(['characteristics']));
+        $animals = Animal::all();
+        return View('/animals/form', compact(['animals', 'characteristics']));
     }
 
     //validasi input, array declaration
@@ -30,7 +31,7 @@ class AnimalController extends Controller
             'characteristic_id' => 'required|int',
         ]);
         if ($validator->fails()) {
-            return redirect('animals/create')
+            return redirect('animals/form')
                 ->withInput()
                 ->withErrors($validator);
         }
@@ -46,7 +47,7 @@ class AnimalController extends Controller
         $characteristics = Characteristic::all();
         $animals = Animal::find($id);
         //dd($animals);
-        return view('/animals/edit', compact('animals', 'characteristics'));
+        return view('/animals/form', compact('animals', 'characteristics'));
     }
 
     public function update($id, Request $request)
@@ -57,7 +58,7 @@ class AnimalController extends Controller
             'characteristic_id' => 'required|int|gt:0',
         ]);
         if ($validator->fails()) {
-            return redirect('animals/' . $id . '/edit')
+            return redirect('animals/' . $id . '/form')
                 ->withInput()
                 ->withErrors($validator);
         }
@@ -83,5 +84,12 @@ class AnimalController extends Controller
         //     ->where('name', 'LIKE', "%{$searchTerm}%")
         //     ->get();
         return view('/animals', compact('animals'));
+    }
+
+    public function form($id = null)
+    {
+        $characteristics = Characteristic::all();
+        $animals = $id ? Animal::find($id) : new Animal();
+        return view('/animals/form', compact('animals', 'characteristics'));
     }
 }

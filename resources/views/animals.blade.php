@@ -19,7 +19,7 @@
                             <div class="col-auto"><input class="btn btn-secondary" type="submit" value="Search"></div>
 
                         </form>
-                        <a class="btn btn-info float-end" href="/animals/create">Add New Animal</a>
+                        <a class="btn btn-info float-end" href="/animals/{{ $animal->id }}/form">Add New Animal</a>
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
@@ -37,7 +37,7 @@
                                         <td> {{ $animal->characteristic->name }} </td>
                                         <td>
                                             <div class="btn-group">
-                                                <a class="btn btn-primary" href="/animals/{{ $animal->id }}/edit">Edit</a>
+                                                <a class="btn btn-primary" href="/animals/{{ $animal->id }}/form">Edit</a>
                                                 <form action="/animals/{{ $animal->id }}" method="POST">
                                                     @csrf
                                                     @method('delete')
