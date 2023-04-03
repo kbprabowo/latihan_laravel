@@ -17,7 +17,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="/{{ $animals->id }}" method="POST">
+                        <form action="/animals/{{ $animals->id }}" method="POST">
                             @method('put')
                             @csrf
                             <div class="mb-3">

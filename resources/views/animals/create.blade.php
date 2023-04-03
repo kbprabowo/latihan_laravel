@@ -17,7 +17,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="/store" method="POST">
+                        <form action="/animals/store" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Masukan nama hewan</label>

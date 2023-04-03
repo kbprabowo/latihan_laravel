@@ -13,7 +13,7 @@
                         @endif
 
                         <h1>List nama hewan</h1>
-                        <a class="btn btn-info float-end" href="/create">Add New Animal</a>
+                        <a class="btn btn-info float-end" href="/animals/create">Add New Animal</a>
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
@@ -30,14 +30,15 @@
                                         <td> {{ $animal->name }} </td>
                                         <td> {{ $animal->characteristic->name }} </td>
                                         <td>
-                                            <a class="btn btn-primary d-grid gap-2 col-4"
-                                                href="/{{ $animal->id }}/edit">Edit</a>
-                                            <form action="/{{ $animal->id }}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <input class="btn btn-danger d-grid gap-2 col-4" type="submit"
-                                                    value="Delete">
-                                            </form>
+                                            <div class="btn-group">
+                                                <a class="btn btn-primary" href="/animals/{{ $animal->id }}/edit">Edit</a>
+
+                                                <form action="/animals/{{ $animal->id }}" method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <input class="btn btn-danger" type="submit" value="Delete">
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

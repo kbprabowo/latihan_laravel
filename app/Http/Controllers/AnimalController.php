@@ -7,18 +7,19 @@ use App\Models\Animal;
 use App\Models\Characteristic;
 use Illuminate\Support\Facades\Validator;
 
-class ListController extends Controller
+class AnimalController extends Controller
 {
     public function index()
     {
         $animals = Animal::all();
-        return View('list', compact(['animals']));
+        // $animals = Animal::simplePaginate(5);
+        return View('/animals', compact(['animals']));
     }
 
     public function create()
     {
         $characteristics = Characteristic::all();
-        return View('create', compact(['characteristics']));
+        return View('/animals/create', compact(['characteristics']));
     }
 
     //validasi input, array declaration
@@ -29,7 +30,7 @@ class ListController extends Controller
             'characteristic_id' => 'required|int',
         ]);
         if ($validator->fails()) {
-            return redirect('/create')
+            return redirect('animals/create')
                 ->withInput()
                 ->withErrors($validator);
         }
@@ -37,7 +38,7 @@ class ListController extends Controller
             'name' => $request->name,
             'characteristic_id' => $request->characteristic_id,
         ]);
-        return redirect('list');
+        return redirect('/animals');
     }
 
     public function edit($id)
@@ -45,7 +46,7 @@ class ListController extends Controller
         $characteristics = Characteristic::all();
         $animals = Animal::find($id);
         //dd($animals);
-        return view('edit', compact('animals', 'characteristics'));
+        return view('/animals/edit', compact('animals', 'characteristics'));
     }
 
     public function update($id, Request $request)
@@ -56,14 +57,14 @@ class ListController extends Controller
             'characteristic_id' => 'required|int|gt:0',
         ]);
         if ($validator->fails()) {
-            return redirect($id . '/edit')
+            return redirect('animals/' . $id . '/edit')
                 ->withInput()
                 ->withErrors($validator);
         }
 
         Animal::where('id', $id)->update(['name' => $request['name'], 'characteristic_id' => $request['characteristic_id']]);
 
-        return redirect('list');
+        return redirect('/animals');
     }
 
     public function destroy($id)
@@ -71,6 +72,6 @@ class ListController extends Controller
         $animal = Animal::find($id);
         //dd($id);
         $animal->delete();
-        return redirect('list');
+        return redirect('/animals');
     }
 }
