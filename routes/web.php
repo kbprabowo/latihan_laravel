@@ -45,4 +45,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/animals/{id}/edit', [AnimalController::class, 'edit']);
     Route::put('/animals/{id}', [AnimalController::class, 'update']);
     Route::delete('/animals/{id}', [AnimalController::class, 'destroy']);
+    Route::get('/animals/search', [AnimalController::class, 'search']);
 });

@@ -74,4 +74,14 @@ class AnimalController extends Controller
         $animal->delete();
         return redirect('/animals');
     }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('searchTerm');
+        $animals = Animal::where('name', 'like', '%' . $searchTerm . '%')->paginate();
+        // $animals = DB::table('animals')
+        //     ->where('name', 'LIKE', "%{$searchTerm}%")
+        //     ->get();
+        return view('/animals', compact('animals'));
+    }
 }

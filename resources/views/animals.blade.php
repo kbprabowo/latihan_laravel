@@ -11,8 +11,14 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
                         <h1>List nama hewan</h1><br>
+
+                        <form class="row g-3" action="/animals/search" method="GET">
+                            <div class="col-auto"><input class="form-control" type="text" name="searchTerm"
+                                    placeholder="Cari nama hewan .."></div>
+                            <div class="col-auto"><input class="btn btn-secondary" type="submit" value="Search"></div>
+
+                        </form>
                         <a class="btn btn-info float-end" href="/animals/create">Add New Animal</a>
                         <table class="table table-striped table-hover">
                             <thead>
@@ -32,7 +38,6 @@
                                         <td>
                                             <div class="btn-group">
                                                 <a class="btn btn-primary" href="/animals/{{ $animal->id }}/edit">Edit</a>
-
                                                 <form action="/animals/{{ $animal->id }}" method="POST">
                                                     @csrf
                                                     @method('delete')
