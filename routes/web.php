@@ -40,8 +40,8 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/animals', [AnimalController::class, 'index']);
-    Route::get('/animals/create', [AnimalController::class, 'create']);
-    Route::post('/animals/store', [AnimalController::class, 'store'])->name('store');
+    Route::get('/animals/create', [AnimalController::class, 'create'])->name('create');
+    Route::post('/animals/form', [AnimalController::class, 'store'])->name('store');
     Route::get('/animals/{id}/form', [AnimalController::class, 'edit'])->name('edit');
     Route::put('/animals/{id}', [AnimalController::class, 'update'])->name('update');
     Route::delete('/animals/{id}', [AnimalController::class, 'destroy']);

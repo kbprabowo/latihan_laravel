@@ -16,7 +16,7 @@ class AnimalController extends Controller
         return View('/animals', compact(['animals']));
     }
 
-    public function create($id)
+    public function create()
     {
         $characteristics = Characteristic::all();
         $animals = Animal::all();

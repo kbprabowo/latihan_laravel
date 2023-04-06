@@ -27,7 +27,7 @@
                                 {{-- <form action="{{ route('update', $animals->id) }}" method="POST"></form> --}}
                                 @method('put')
                                 {{-- @else
-                            <form action="{{ route('store') }}" method="POST"></form> --}}
+                            <form action="{{ route('store') }}"></form> --}}
                             @endif
                             @csrf
                             <div class="mb-3">
