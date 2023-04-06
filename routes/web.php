@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ListController;
+use App\Http\Controllers\AnimalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +27,24 @@ Route::put('/{id}', [ListController::class, 'update']);
 Route::delete('/{id}', [ListController::class, 'destroy']); */
 
 Auth::routes();
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/list', [ListController::class, 'index']);
+//     Route::get('/create', [ListController::class, 'create']);
+//     Route::post('/store', [ListController::class, 'store']);
+//     Route::get('/{id}/edit', [ListController::class, 'edit']);
+//     Route::put('/{id}', [ListController::class, 'update']);
+//     Route::delete('/{id}', [ListController::class, 'destroy']);
+// });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/list', [ListController::class, 'index']);
-    Route::get('/create', [ListController::class, 'create']);
-    Route::post('/store', [ListController::class, 'store']);
-    Route::get('/{id}/edit', [ListController::class, 'edit']);
-    Route::put('/{id}', [ListController::class, 'update']);
-    Route::delete('/{id}', [ListController::class, 'destroy']);
+    Route::get('/animals', [AnimalController::class, 'index']);
+    Route::get('/animals/form', [AnimalController::class, 'create'])->name('create');
+    Route::post('/animals/form', [AnimalController::class, 'store'])->name('store');
+    Route::get('/animals/{id}/form', [AnimalController::class, 'edit'])->name('edit');
+    Route::put('/animals/{id}', [AnimalController::class, 'update'])->name('update');
+    Route::delete('/animals/{id}', [AnimalController::class, 'destroy']);
+    Route::get('/animals/search', [AnimalController::class, 'search']);
+    // Route::get('/animals/{id}/form', [AnimalController::class, 'form'])->name('form');
 });
