@@ -37,7 +37,7 @@
                     <td> {{ $animal->characteristic->name }} </td>
                     <td>
                       <div class="btn-group">
-                        <a class="btn btn-primary" href="/animals/{{ $animal->id }}/form">Edit</a>
+                        <a class="btn btn-primary" href="/animals/{{ $animal->id }}/edit">Edit</a>
                         <form action="/animals/{{ $animal->id }}" method="POST">
                           @csrf
                           @method('delete')
