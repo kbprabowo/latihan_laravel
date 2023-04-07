@@ -9,17 +9,29 @@ use Illuminate\Support\Facades\Validator;
 
 class AnimalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $animals = Animal::paginate(10);
-        // $animals = Animal::simplePaginate(5);
-        return View('/animals', compact(['animals']));
+        $characteristics = Characteristic::all();
+        $searchName = $request->input('name');
+        $searchCharacteristic = $request->input('characteristic_id');
+
+        if ($searchName) {
+            $animals = Animal::where('name', 'like', '%' . $searchName . '%')->paginate();
+            // $lastPage = $animals->lastPage();
+            // return redirect('/animals?page=' . $lastPage);
+        } elseif ($searchCharacteristic) {
+            $animals = Animal::where('characteristic_id', $searchCharacteristic)->paginate();
+        } else {
+            $animals = Animal::paginate(10);
+        }
+        return View('/animals', compact(['animals', 'characteristics']));
     }
 
     public function create()
     {
         $characteristics = Characteristic::all();
         $animals = Animal::all();
+        $animals = new Animal();
         return View('/animals/form', compact(['animals', 'characteristics']));
     }
 
@@ -84,12 +96,5 @@ class AnimalController extends Controller
         //     ->where('name', 'LIKE', "%{$searchTerm}%")
         //     ->get();
         return view('/animals', compact('animals'));
-    }
-
-    public function form($id = null)
-    {
-        $characteristics = Characteristic::all();
-        $animals = $id ? Animal::find($id) : new Animal();
-        return view('/animals/form', compact('animals', 'characteristics'));
     }
 }
