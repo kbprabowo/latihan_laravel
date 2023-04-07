@@ -19,7 +19,7 @@ class AnimalController extends Controller
     public function create()
     {
         $characteristics = Characteristic::all();
-        $animals = Animal::all();
+        $animals = new  Animal;
         return View('/animals/form', compact(['animals', 'characteristics']));
     }
 
@@ -84,12 +84,5 @@ class AnimalController extends Controller
         //     ->where('name', 'LIKE', "%{$searchTerm}%")
         //     ->get();
         return view('/animals', compact('animals'));
-    }
-
-    public function form($id = null)
-    {
-        $characteristics = Characteristic::all();
-        $animals = $id ? Animal::find($id) : new Animal();
-        return view('/animals/form', compact('animals', 'characteristics'));
     }
 }
