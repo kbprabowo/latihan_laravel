@@ -13,8 +13,8 @@
             @endif
             <h1>List nama hewan</h1><br>
 
-            <form class="row g-3" action="/animals/search" method="GET">
-              <div class="col-auto"><input class="form-control" type="text" name="searchTerm"
+            <form class="row g-3" action="/animals" method="GET">
+              <div class="col-auto"><input class="form-control" type="text" name="name"
                   placeholder="Cari nama hewan .."></div>
               <div class="col-auto"><input class="btn btn-secondary" type="submit" value="Search"></div>
 

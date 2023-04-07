@@ -9,11 +9,20 @@ use Illuminate\Support\Facades\Validator;
 
 class AnimalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $animals = Animal::paginate(10);
+
+        $searchName = $request->input('name');
+        if ($searchName) {
+            $animals = Animal::where('name', 'like', '%' . $searchName . '%')->paginate();
+        } else {
+            $animals = Animal::paginate(10);
+        }
+        // $animals = DB::table('animals')
+        //     ->where('name', 'LIKE', "%{$searchTerm}%")
+        //     ->get();
+        return view('/animals', compact('animals'));
         // $animals = Animal::simplePaginate(5);
-        return View('/animals', compact(['animals']));
     }
 
     public function create()
@@ -74,15 +83,5 @@ class AnimalController extends Controller
         //dd($id);
         $animal->delete();
         return redirect('/animals');
-    }
-
-    public function search(Request $request)
-    {
-        $searchTerm = $request->input('searchTerm');
-        $animals = Animal::where('name', 'like', '%' . $searchTerm . '%')->paginate();
-        // $animals = DB::table('animals')
-        //     ->where('name', 'LIKE', "%{$searchTerm}%")
-        //     ->get();
-        return view('/animals', compact('animals'));
     }
 }
