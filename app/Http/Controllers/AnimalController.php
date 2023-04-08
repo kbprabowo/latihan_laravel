@@ -15,7 +15,11 @@ class AnimalController extends Controller
         $searchName = $request->input('name');
         $searchCharacteristic = $request->input('characteristic_id');
 
-        if ($searchName) {
+        if ($searchName && $searchCharacteristic) {
+            $animals = Animal::where('name', 'like', '%' . $searchName . '%')
+                ->where('characteristic_id', $searchCharacteristic)
+                ->paginate();
+        } elseif ($searchName) {
             $animals = Animal::where('name', 'like', '%' . $searchName . '%')->paginate();
         } elseif ($searchCharacteristic) {
             $animals = Animal::where('characteristic_id', $searchCharacteristic)->paginate();

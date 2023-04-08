@@ -15,7 +15,8 @@
 
                         <form class="row g-3" action="/animals" method="GET">
                             <div class="col-auto"><input class="form-control" type="text" name="name"
-                                    placeholder="Cari nama hewan .."></div>
+                                    placeholder="Cari nama hewan ..">
+                            </div>
                             <div class="col-auto">
                                 <select name="characteristic_id" class="form-select" name="characteristic">
                                     <option value="0">Semua karakter hewan</option>
