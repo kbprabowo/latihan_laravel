@@ -17,8 +17,6 @@ class AnimalController extends Controller
 
         if ($searchName) {
             $animals = Animal::where('name', 'like', '%' . $searchName . '%')->paginate();
-            // $lastPage = $animals->lastPage();
-            // return redirect('/animals?page=' . $lastPage);
         } elseif ($searchCharacteristic) {
             $animals = Animal::where('characteristic_id', $searchCharacteristic)->paginate();
         } else {
@@ -40,10 +38,10 @@ class AnimalController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'bail|required|string|max:255',
-            'characteristic_id' => 'required|int',
+            'characteristic_id' => 'required|int|gt:0',
         ]);
         if ($validator->fails()) {
-            return redirect('animals/form')
+            return redirect('animals/create')
                 ->withInput()
                 ->withErrors($validator);
         }
@@ -70,7 +68,7 @@ class AnimalController extends Controller
             'characteristic_id' => 'required|int|gt:0',
         ]);
         if ($validator->fails()) {
-            return redirect('animals/' . $id . '/form')
+            return redirect('animals/' . $id . '/edit')
                 ->withInput()
                 ->withErrors($validator);
         }

@@ -24,22 +24,23 @@
                         @endif
                         <form method="POST" action="{{ $animals->id ? route('update', $animals->id) : route('store') }}">
                             @if ($animals->id)
-                                {{-- <form action="{{ route('update', $animals->id) }}" method="POST"></form> --}}
                                 @method('put')
-                                {{-- @else
-                            <form action="{{ route('store') }}"></form> --}}
                             @endif
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Masukan nama hewan</label>
                                 <input type="text" class="form-control" name="name" value="{{ $animals->name }}">
                             </div>
-                            <select name="characteristic_id" class="form-select" aria-label="Default select example">
+                            <select name="characteristic_id" class="form-select">
                                 <option value="0">Pilih karakter hewannya</option>
                                 @foreach ($characteristics as $characteristic)
-                                    <option @if ($animals->characteristic_id == $characteristic->id) selected @endif
-                                        value="{{ $characteristic->id }}">
-                                        {{ $characteristic->name }}</option>
+                                    @if ($animals->id)
+                                        <option @if ($animals->characteristic_id == $characteristic->id) selected @endif
+                                            value="{{ $characteristic->id }}">
+                                            {{ $characteristic->name }}</option>
+                                    @else
+                                        <option value="{{ $characteristic->id }}">{{ $characteristic->name }}</option>
+                                    @endif
                                 @endforeach
                             </select><br>
                             <input class="btn btn-primary" type="submit" name="submit" value="save">
