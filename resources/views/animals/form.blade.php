@@ -34,13 +34,9 @@
                             <select name="characteristic_id" class="form-select">
                                 <option value="0">Pilih karakter hewannya</option>
                                 @foreach ($characteristics as $characteristic)
-                                    @if ($animals->id)
-                                        <option @if ($animals->characteristic_id == $characteristic->id) selected @endif
-                                            value="{{ $characteristic->id }}">
-                                            {{ $characteristic->name }}</option>
-                                    @else
-                                        <option value="{{ $characteristic->id }}">{{ $characteristic->name }}</option>
-                                    @endif
+                                    <option @if ($animals->characteristic_id == $characteristic->id) selected @endif
+                                        value="{{ $characteristic->id }}">
+                                        {{ $characteristic->name }}</option>
                                 @endforeach
                             </select><br>
                             <input class="btn btn-primary" type="submit" name="submit" value="save">
