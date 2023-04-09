@@ -53,7 +53,10 @@ class AnimalController extends Controller
             'name' => $request->name,
             'characteristic_id' => $request->characteristic_id,
         ]);
-        $lastPage = Animal::paginate()->lastPage() + 1;
+        $lastPage = Animal::paginate()->lastPage();
+        if ($lastPage !== null) {
+            $lastPage += 1;
+        }
         return redirect('/animals?page=' . $lastPage);
     }
 
@@ -79,7 +82,8 @@ class AnimalController extends Controller
         }
 
         Animal::where('id', $id)->update(['name' => $request['name'], 'characteristic_id' => $request['characteristic_id']]);
-
+        $previousPage = Animal::paginate()->previousPageUrl();
+        dd($previousPage);
         return redirect('/animals');
     }
 
