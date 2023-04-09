@@ -29,17 +29,18 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Masukan nama hewan</label>
-                                <input type="text" class="form-control" name="name" value="{{ $animals->name }}">
-                            </div>
-                            <select name="characteristic_id" class="form-select">
-                                <option value="0">Pilih karakter hewannya</option>
-                                @foreach ($characteristics as $characteristic)
-                                    <option @if ($animals->characteristic_id == $characteristic->id) selected @endif
-                                        value="{{ $characteristic->id }}">
-                                        {{ $characteristic->name }}</option>
-                                @endforeach
-                            </select><br>
-                            <input class="btn btn-primary" type="submit" name="submit" value="save">
+                                <input type="text" class="form-control" name="name"
+                                    @if ($animals->id) value="{{ $animals->name }}"> @else value="{{ old('name') }}"> @endif
+                                    </div>
+                                <select name="characteristic_id" class="form-select">
+                                    <option value="0">Pilih karakter hewannya</option>
+                                    @foreach ($characteristics as $characteristic)
+                                        <option @if ($animals->characteristic_id == $characteristic->id) selected @endif
+                                            value="{{ $characteristic->id }}">
+                                            {{ $characteristic->name }}</option>
+                                    @endforeach
+                                </select><br>
+                                <input class="btn btn-primary" type="submit" name="submit" value="save">
                         </form>
                     </div>
                 </div>
