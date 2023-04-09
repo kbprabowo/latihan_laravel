@@ -80,10 +80,7 @@ class AnimalController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         }
-
         Animal::where('id', $id)->update(['name' => $request['name'], 'characteristic_id' => $request['characteristic_id']]);
-        $previousPage = Animal::paginate()->previousPageUrl();
-        dd($previousPage);
         return redirect('/animals');
     }
 
@@ -93,15 +90,5 @@ class AnimalController extends Controller
         //dd($id);
         $animal->delete();
         return redirect('/animals');
-    }
-
-    public function search(Request $request)
-    {
-        $searchTerm = $request->input('searchTerm');
-        $animals = Animal::where('name', 'like', '%' . $searchTerm . '%')->paginate();
-        // $animals = DB::table('animals')
-        //     ->where('name', 'LIKE', "%{$searchTerm}%")
-        //     ->get();
-        return view('/animals', compact('animals'));
     }
 }
