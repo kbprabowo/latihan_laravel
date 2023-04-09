@@ -32,11 +32,13 @@
                                 <input type="text" class="form-control" name="name"
                                     @if ($animals->id) value="{{ $animals->name }}"> @else value="{{ old('name') }}"> @endif
                                     </div>
+
                                 <select name="characteristic_id" class="form-select">
                                     <option value="0">Pilih karakter hewannya</option>
                                     @foreach ($characteristics as $characteristic)
                                         <option @if ($animals->characteristic_id == $characteristic->id) selected @endif
-                                            value="{{ $characteristic->id }}">
+                                            value="{{ $characteristic->id }}"
+                                            {{ old('characteristic_id', $animals->characteristic_id) == $characteristic->id ? 'selected' : '' }}>
                                             {{ $characteristic->name }}</option>
                                     @endforeach
                                 </select><br>
