@@ -57,20 +57,19 @@ class AnimalController extends Controller
         if ($lastPage !== null) {
             $lastPage += 1;
         }
-        return redirect('/animals?page=' . $lastPage);
+        return redirect('/animals?page=' . $lastPage)->with('success', 'Data berhasil dibuat!');
     }
 
     public function edit($id)
     {
         $characteristics = Characteristic::all();
         $animals = Animal::find($id);
-        //dd($animals);
+        session()->put('referer', url()->previous());
         return view('/animals/form', compact('animals', 'characteristics'));
     }
 
     public function update($id, Request $request)
     {
-        //$animals = Animal::find($id);
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'characteristic_id' => 'required|int|gt:0',
@@ -81,7 +80,8 @@ class AnimalController extends Controller
                 ->withErrors($validator);
         }
         Animal::where('id', $id)->update(['name' => $request['name'], 'characteristic_id' => $request['characteristic_id']]);
-        return redirect('/animals');
+        return redirect(session()->get('referer'))->with('success', 'Data berhasil diupdate!');
+        // return redirect('/animals');
     }
 
     public function destroy($id)
