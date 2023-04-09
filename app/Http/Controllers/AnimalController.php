@@ -53,7 +53,8 @@ class AnimalController extends Controller
             'name' => $request->name,
             'characteristic_id' => $request->characteristic_id,
         ]);
-        return redirect('/animals');
+        $lastPage = Animal::paginate()->lastPage() + 1;
+        return redirect('/animals?page=' . $lastPage);
     }
 
     public function edit($id)
