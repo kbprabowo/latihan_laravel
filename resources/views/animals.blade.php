@@ -14,14 +14,17 @@
                         <h1>List nama hewan</h1><br>
 
                         <form class="row g-3" action="/animals" method="GET">
-                            <div class="col-auto"><input class="form-control" type="text" name="name"
-                                    placeholder="Cari nama hewan ..">
+                            <div class="col-auto">
+                                <input class="form-control" type="text" name="name" placeholder="Cari nama hewan .."
+                                    value="{{ isset($searchName) ? $searchName : '' }}">
                             </div>
                             <div class="col-auto">
                                 <select name="characteristic_id" class="form-select" name="characteristic">
                                     <option value="0">Semua karakter hewan</option>
                                     @foreach ($characteristics as $characteristic)
-                                        <option value="{{ $characteristic->id }}">{{ $characteristic->name }}</option>
+                                        <option value="{{ $characteristic->id }}"
+                                            {{ isset($searchCharacteristic) && $searchCharacteristic == $characteristic->id ? 'selected' : '' }}>
+                                            {{ $characteristic->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

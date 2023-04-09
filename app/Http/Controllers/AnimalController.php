@@ -26,7 +26,10 @@ class AnimalController extends Controller
         } else {
             $animals = Animal::paginate(10);
         }
-        return View('/animals', compact(['animals', 'characteristics']));
+        return View('/animals', compact(['animals', 'characteristics']), [
+            'searchName' => $searchName,
+            'searchCharacteristic' => $searchCharacteristic,
+        ]);
     }
 
     public function create()
