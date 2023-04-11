@@ -62,7 +62,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $animals->links() }}
+                        {{ $animals->appends(['name' => $searchName, 'characteristic_id' => $searchCharacteristic])->links() }}
                     </div>
                 </div>
             </div>
