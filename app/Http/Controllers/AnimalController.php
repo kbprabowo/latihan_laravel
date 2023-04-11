@@ -24,12 +24,9 @@ class AnimalController extends Controller
         } elseif ($searchCharacteristic) {
             $animals = Animal::where('characteristic_id', $searchCharacteristic)->paginate();
         } else {
-            $animals = Animal::paginate(10);
+            $animals = Animal::paginate();
         }
-        return View('/animals', compact(['animals', 'characteristics']), [
-            'searchName' => $searchName,
-            'searchCharacteristic' => $searchCharacteristic,
-        ]);
+        return View('/animals', compact(['animals', 'characteristics', 'searchName', 'searchCharacteristic']));
     }
 
     public function create()
@@ -57,9 +54,6 @@ class AnimalController extends Controller
             'characteristic_id' => $request->characteristic_id,
         ]);
         $lastPage = Animal::paginate()->lastPage();
-        if ($lastPage !== null) {
-            $lastPage += 1;
-        }
         return redirect('/animals?page=' . $lastPage)->with('success', 'Data berhasil dibuat!');
     }
 
@@ -92,6 +86,6 @@ class AnimalController extends Controller
         $animal = Animal::find($id);
         //dd($id);
         $animal->delete();
-        return redirect('/animals');
+        return redirect('/animals')->with('success', 'Data berhasil dihapus!');
     }
 }
